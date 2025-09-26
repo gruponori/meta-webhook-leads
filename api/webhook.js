@@ -8,10 +8,16 @@ app.use(bodyParser.json());
 
 // CONFIGURAÇÕES - ALTERE ESTES VALORES
 const VERIFY_TOKEN = 'Podecrer22'; // Use exatamente o token que informar no Meta Developers
-const PAGE_ACCESS_TOKEN = 'SEU_TOKEN_DE_ACESSO_DA_PAGINA';
-const EMAIL_USER = 'seu.email@gmail.com';
-const EMAIL_PASS = 'sua_senha_de_app';
-const EMAIL_DESTINO = 'destino@empresa.com';
+const PAGE_ACCESS_TOKEN = 'EAASZASWHBUjoBPnckd81PqmhFG47pqHd6ewj0Gkx2AxZCuQj0QH8mbJL3MUuWiq2wuyeIWN0GQvq9Hjxg0WQDlrA6AZBZBT2K1dY6jLLxnzKn2P4TOvaiCUOlZCkf8uGiuhxGWWoZAXAg2eZCTDeK6m32gjvC9IZAcUBwrr13I0QTC3sOBpFefrWzO6GDoIZA7HTIzzgpNrtebC4RGmlotNsNnavTj7dcrb3m';
+const EMAIL_USER = 'gnorimkt@gmail.com';
+const EMAIL_PASS = 'gioq aiuy coev oglu';
+// Lista de e-mails separados por vírgula para o envio
+const EMAIL_DESTINO = [
+  'daniela.oliveira@bcef.com.br',
+  'marcelo@gruponori.com',
+  'giseleo@gruponori.com',
+  'mkt@gruponori.com'
+].join(',');
 
 const PORT = process.env.PORT || 3000;
 
@@ -76,11 +82,11 @@ app.post('/webhook', async (req, res) => {
               <pre>${camposTexto}</pre>
             `;
 
-            // Enviar email
+            // Enviar email para vários destinatários
             await transporter.sendMail({
               from: EMAIL_USER,
               to: EMAIL_DESTINO,
-              subject: `Novo Lead Facebook - ${campos.full_name || campos.email || 'Lead'}`,
+              subject: `Novo Lead Choes Franquias - ${campos.full_name || campos.email || 'Lead'}`,
               html: emailHTML
             });
 
