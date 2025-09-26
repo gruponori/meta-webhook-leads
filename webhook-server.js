@@ -7,11 +7,11 @@ const app = express();
 app.use(bodyParser.json());
 
 // CONFIGURAÇÕES - ALTERE ESTES VALORES
-const VERIFY_TOKEN = 'meutoken123disparo'; // Coloque seu token aqui
-const PAGE_ACCESS_TOKEN = 'SEU_TOKEN_DE_ACESSO_DA_PAGINA'; // Token estendido da página Meta
-const EMAIL_USER = 'seu.email@gmail.com'; // Email que vai enviar
-const EMAIL_PASS = 'sua_senha_de_app'; // Senha de app do Gmail
-const EMAIL_DESTINO = 'destino@empresa.com'; // Email que vai receber os leads
+const VERIFY_TOKEN = 'Podecrer22'; // Use exatamente o token que informar no Meta Developers
+const PAGE_ACCESS_TOKEN = 'SEU_TOKEN_DE_ACESSO_DA_PAGINA';
+const EMAIL_USER = 'seu.email@gmail.com';
+const EMAIL_PASS = 'sua_senha_de_app';
+const EMAIL_DESTINO = 'destino@empresa.com';
 
 const PORT = process.env.PORT || 3000;
 
