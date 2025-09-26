@@ -1,4 +1,0 @@
-"main": "api/webhook-server.js",
-"scripts": {
-  "start": "node api/webhook-server.js"
-}
