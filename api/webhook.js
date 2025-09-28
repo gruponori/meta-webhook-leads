@@ -8,7 +8,7 @@ app.use(bodyParser.json());
 
 // CONFIGURAÇÕES - IDEALMENTE USE VARIÁVEIS DE AMBIENTE
 const VERIFY_TOKEN = process.env.VERIFY_TOKEN || 'Podecrer22'; // Token do Meta Developers
-const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN || 'EAASZASWHBUjoBPnckd81PqmhFG47pqHd6ewj0Gkx2AxZCuQj0QH8mbJL3MUuWiq2wuyeIWN0GQvq9Hjxg0WQDlrA6AZBZBT2K1dY6jLLxnzKn2P4TOvaiCUOlZCkf8uGiuhxGWWoZAXAg2eZCTDeK6m32gjvC9IZAcUBwrr13I0QTC3sOBpFefrWzO6GDoIZA7HTIzzgpNrtebC4RGmlotNsNnavTj7dcrb3m'; // Token real
+const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN || 'EAASZASWHBUjoBPmmKJZBkORJkB2dLmLuQkYwPgdynuhn3SNBcm8W52OiL0PP48WBjwrcZB8igOGW0PNytZCsEZAbIDz5z5cOyO9qrH5UrIUZBPkzkAJRXidBjsd2ZAFgvfvaeYxUo1vYZAD1fGgDZCBbcIkujSNnfPAIr0nrjSwX7UJtfUFRRHnFfluVmZA1fMqcRJNXE66Ba0blWf48BGFmpoZAKkmrgu1aCYbhjG2WHiSIQZDZD'; // Token real
 const EMAIL_USER = process.env.EMAIL_USER || 'gnorimkt@gmail.com';
 const EMAIL_PASS = process.env.EMAIL_PASS || 'gioq aiuy coev oglu';
 
