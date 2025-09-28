@@ -6,12 +6,13 @@ const nodemailer = require('nodemailer');
 const app = express();
 app.use(bodyParser.json());
 
-// CONFIGURAÇÕES - ALTERE ESTES VALORES
-const VERIFY_TOKEN = 'Podecrer22'; // Use exatamente o token que informar no Meta Developers
-const PAGE_ACCESS_TOKEN = 'EAASZASWHBUjoBPnckd81PqmhFG47pqHd6ewj0Gkx2AxZCuQj0QH8mbJL3MUuWiq2wuyeIWN0GQvq9Hjxg0WQDlrA6AZBZBT2K1dY6jLLxnzKn2P4TOvaiCUOlZCkf8uGiuhxGWWoZAXAg2eZCTDeK6m32gjvC9IZAcUBwrr13I0QTC3sOBpFefrWzO6GDoIZA7HTIzzgpNrtebC4RGmlotNsNnavTj7dcrb3m';
-const EMAIL_USER = 'gnorimkt@gmail.com';
-const EMAIL_PASS = 'gioq aiuy coev oglu';
-// Lista de e-mails separados por vírgula para o envio
+// CONFIGURAÇÕES - IDEALMENTE USE VARIÁVEIS DE AMBIENTE
+const VERIFY_TOKEN = process.env.VERIFY_TOKEN || 'Podecrer22'; // Token do Meta Developers
+const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN || 'EAASZASWHBUjoBPnckd81PqmhFG47pqHd6ewj0Gkx2AxZCuQj0QH8mbJL3MUuWiq2wuyeIWN0GQvq9Hjxg0WQDlrA6AZBZBT2K1dY6jLLxnzKn2P4TOvaiCUOlZCkf8uGiuhxGWWoZAXAg2eZCTDeK6m32gjvC9IZAcUBwrr13I0QTC3sOBpFefrWzO6GDoIZA7HTIzzgpNrtebC4RGmlotNsNnavTj7dcrb3m'; // Token real
+const EMAIL_USER = process.env.EMAIL_USER || 'gnorimkt@gmail.com';
+const EMAIL_PASS = process.env.EMAIL_PASS || 'gioq aiuy coev oglu';
+
+// Destinatários separados por vírgula
 const EMAIL_DESTINO = [
   'daniela.oliveira@bcef.com.br',
   'marcelo@gruponori.com',
@@ -21,7 +22,7 @@ const EMAIL_DESTINO = [
 
 const PORT = process.env.PORT || 3000;
 
-// Configurar transportador de email
+// Configurar nodemailer
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -30,21 +31,25 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-// GET: Verificação do webhook
+// GET para validar webhook Facebook
 app.get('/webhook', (req, res) => {
   const mode = req.query['hub.mode'];
   const token = req.query['hub.verify_token'];
   const challenge = req.query['hub.challenge'];
 
   if (mode === 'subscribe' && token === VERIFY_TOKEN) {
+    console.log('Webhook verificado com sucesso');
     res.status(200).send(challenge);
   } else {
+    console.warn('Falha na verificação do webhook');
     res.sendStatus(403);
   }
 });
 
-// POST: Receber notificações de leads
+// POST para receber leads
 app.post('/webhook', async (req, res) => {
+  console.log('Recebendo webhook POST body:', JSON.stringify(req.body));
+
   const body = req.body;
 
   if (body.object === 'page') {
@@ -53,25 +58,26 @@ app.post('/webhook', async (req, res) => {
         if (change.field === 'leadgen') {
           const leadData = change.value;
           const leadId = leadData.leadgen_id;
+          console.log(`Processando lead ID: ${leadId}`);
 
           try {
-            // Buscar dados completos do lead
             const response = await axios.get(
               `https://graph.facebook.com/v18.0/${leadId}`,
-              {
-                params: { access_token: PAGE_ACCESS_TOKEN }
-              }
+              { params: { access_token: PAGE_ACCESS_TOKEN } }
             );
 
             const lead = response.data;
+            console.log('Dados completos do lead obtidos:', lead);
 
-            // Extrair campos do formulário
             const campos = {};
             lead.field_data.forEach(field => {
               campos[field.name] = field.values.join(', ');
             });
 
-            // Montar email
+            if (!campos) {
+              console.warn('Lead não contém campos preenchidos');
+            }
+
             const dataFormatada = new Date(lead.created_time).toLocaleString('pt-BR');
             const camposTexto = Object.entries(campos).map(([k, v]) => `${k}: ${v}`).join('\n');
             const emailHTML = `
@@ -82,13 +88,14 @@ app.post('/webhook', async (req, res) => {
               <pre>${camposTexto}</pre>
             `;
 
-            // Enviar email para vários destinatários
+            console.log('Enviando email para:', EMAIL_DESTINO);
             await transporter.sendMail({
               from: EMAIL_USER,
               to: EMAIL_DESTINO,
               subject: `Novo Lead Choes Franquias - ${campos.full_name || campos.email || 'Lead'}`,
               html: emailHTML
             });
+            console.log('Email enviado com sucesso!');
 
           } catch (error) {
             console.error('Erro ao processar lead:', error.message || error);
@@ -97,7 +104,6 @@ app.post('/webhook', async (req, res) => {
       }
     }
   }
-
   res.status(200).send('OK');
 });
 
