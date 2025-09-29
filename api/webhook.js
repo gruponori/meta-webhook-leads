@@ -85,9 +85,7 @@ app.post('/api/webhook', async (req, res) => {
             await transporter.sendMail({
               from: EMAIL_USER,
               to: EMAIL_DESTINO,
-              - subject: `Novo Lead Choes Franquias – \${campos.full_name || campos.email || 'Lead'}`,
-              + subject: `Novo Lead Choes Franquias – ${campos.full_name || campos.email || 'Lead'}`,
-
+             subject: `Novo Lead Choes Franquias – ${campos.full_name || campos.email || 'Lead'}`,
               html: emailHTML
             });
             console.log('Email enviado com sucesso!');
