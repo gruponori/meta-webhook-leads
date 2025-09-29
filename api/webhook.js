@@ -50,19 +50,21 @@ app.post('/api/webhook', async (req, res) => {
           const leadId = change.value.leadgen_id;
           console.log(`Processando lead ID: ${leadId}`);
           try {
-            - const response = await axios.get(
--   `https://graph.facebook.com/v18.0/${leadId}`,
--   { params: { access_token: PAGE_ACCESS_TOKEN } }
-- );
-+ const response = await axios.get(
-+   `https://graph.facebook.com/v18.0/${leadId}`,
-+   {
-+     params: {
-+       access_token: PAGE_ACCESS_TOKEN,
-+       fields: 'id,created_time,field_data'
-+     }
-+   }
-+ );
+
+            const response = await axios.get(
+    `https://graph.facebook.com/v18.0/${leadId}`,
+    {
+      params: {
+        access_token: PAGE_ACCESS_TOKEN,
+        fields: 'id,created_time,field_data'
+      }
+    }
+  );
+  const lead = response.data;
+  // … resto do processamento
+} catch (err) {
+  console.error('Erro ao processar lead:', err.message || err);
+};
 
             const lead = response.data;
             console.log('Dados completos do lead obtidos:', lead);
