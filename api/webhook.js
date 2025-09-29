@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 
 // CONFIGURAÇÕES – use variáveis de ambiente no Vercel
 const VERIFY_TOKEN = process.env.VERIFY_TOKEN || 'Podecrer22';
-const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN  || 'EAASZASWHBUjoBPmmKJZBkORJkB2dLmLuQkYwPgdynuhn3SNBcm8W52OiL0PP48WBjwrcZB8igOGW0PNytZCsEZAbIDz5z5cOyO9qrH5UrIUZBPkzkAJRXidBjsd2ZAFgvfvaeYxUo1vYZAD1fGgDZCBbcIkujSNnfPAIr0nrjSwX7UJtfUFRRHnFfluVmZA1fMqcRJNXE66Ba0blWf48BGFmpoZAKkmrgu1aCYbhjG2WHiSIQZDZD'; 
+const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN  || 'EAASZASWHBUjoBPjXs6Gt8N8qA5SZBWGoaN1uS8pjTsyZBW0el38HDFZAZCo9d5rBBNhHBLqzuc3emX9nAHyRvUSxZBrQB5wXW4nNQtazt4HRgIkBxyQXhsPjyYYsZBQtloW9fPkqn8E7FMBZAZA7SctDMx6eu5un68psSkp5ZCr61vCUJQ8PxE6IyiDafMivvAp4OZCCTS6jmBaTN0GeASiL0qpdDBN21q3CvkTAZBcd'; 
 const EMAIL_USER = process.env.EMAIL_USER || 'gnorimkt@gmail.com';
 const EMAIL_PASS = process.env.EMAIL_PASS || 'gioq aiuy coev oglu';
 const EMAIL_DESTINO = [
