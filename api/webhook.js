@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 
 // CONFIGURAÇÕES – use variáveis de ambiente no Vercel
 const VERIFY_TOKEN = process.env.VERIFY_TOKEN || 'Podecrer22';
-const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN  || 'EAASZASWHBUjoBPtmHDUDtgZB7IzTe4fo8DIZCbPYm70yuIOhQ6C8BLBRsZAhzsFnelenai51d5SXcoMeiZBvdXwTFZAdnCs7dSqU6bBrEi77wIdrTaT0K4YXageliRz5k9A46ZBDMLQZBDxaYxgNhZCCinlFI0o6vRdiuA2hyplLZBa6AIZCeERcoLhnQaN0LOcgtJt'; 
+const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN  || 'EAASZASWHBUjoBPimmfHt4mLMAsSpRzQiZCdwOxIRdfoxMObguzmib4TkWgeoOZAOo31DGpcmU6Dr6mnqbNkqX6o8zqrZBM4hyPhE0hAdUkTEWqGIesPtTneThJRNRJeVXJZA2OnPAfaQihzEinlgtm0YK8ZCsRn7RBzrrCWqeAbFdtMvfedI8gZALsKfFEffgZDZD'; 
 const EMAIL_USER = process.env.EMAIL_USER || 'gnorimkt@gmail.com';
 const EMAIL_PASS = process.env.EMAIL_PASS || 'gioq aiuy coev oglu';
 const EMAIL_DESTINO = [
